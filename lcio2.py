@@ -87,9 +87,10 @@ print 'InitStartDevice', wl.InitStartLDevice(hIfc)
 print 'StartDevice', wl.StartLDevice(hIfc)
 print 'EnableCorrection', wl.EnableCorrection(hIfc, 1)
 
+dacval = 1000   #значение ЦАП в мВ
 i = 0
 while i < 200:
-    x = (-2000 * 2048) / 5000
+    x = (dacval * 2048) / 5000
     pp.contents.Data[0] = int(round(x, 0))
     wl.IoAsync(hIfc, pp)
     i += 1
