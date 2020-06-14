@@ -4,10 +4,6 @@ from ctypes import cdll, pointer, c_ulong, POINTER
 from ctypes import *
 import time
 import sys
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import figure, show
-import numpy.fft as fft
-from numpy import arange, sin, pi
 
 class slot(ctypes.Structure):
     _fields_ = [('Base', ctypes.c_ulong),
