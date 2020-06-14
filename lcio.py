@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from ctypes import cdll, pointer, c_ulong
 from ctypes import *
-#import numpy as np
 
 class slot(Structure):
     _fields_ = [('Base', c_ulong),
@@ -92,45 +91,9 @@ pp.contents.Pages = 2
 pp.contents.dRate = 100.0
 pp.contents.NCh = 1
 
-'''x1 = []
-print ('-------------1--------------')
-arr = np.array(np.zeros(100), dtype=int)
-for i in range(100):    
-    pp.contents.Chn[0] = 00000000   #00000000(00)   00100000(20)
-    k = wl.IoAsync(hIfc, pp)
-    x = pp.contents.Data[0]
-    x2 = x*(10.0/8000)
-    x3 = (x-65536)*(10.0/8000)
-    if x < 10000:
-        #print '+', k, x2
-        x1.append(x2)
-        #arr = np.hstack((arr, x2))
-    elif x > 10000:
-        #print '-',k, x3
-        x1.append(x3)
-        arr = np.hstack((arr, x3))
-#print ((arr.max() - arr.min()) / (1.41 * 2))
-#print x1
-print ((max(x1) - min(x1)) / (1.41 * 2))'''
-
-'''print ('-------------1--------------')
-x1 = []
-for i in range(0, 50):
-    k = wl.IoAsync(hIfc, pp)
-    x = pp.contents.Data[0]
-    x2 = x*(10.0/8000)
-    x3 = (x-65536)*(10.0/8000)
-    if x < 10000:
-        print '+', k, x2
-        x1.append(x2)
-    elif x > 10000:
-        print '-',k, x3
-        x1.append(x3)
-print ((max(x1) - min(x1)) / (1.41 * 2))'''
-
 print ('-------------1 gain--------------')
 for i in range(0, 10):
-    pp.contents.Chn[0] = 0	#00000000(00)	00100000(20)
+    pp.contents.Chn[0] = 0x00	#00000000(00)	00100000(20)
     k = wl.IoAsync(hIfc, pp)
     x = pp.contents.Data[0]
     if x < 10000:
