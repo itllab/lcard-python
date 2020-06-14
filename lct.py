@@ -8,11 +8,6 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, show
 import numpy.fft as fft
 from numpy import arange, sin, pi
-#from numpy import *
-#import numpy as np
-#from scipy.signal import argrelextrema
-#from scipy import fftpack
-
 
 class slot(ctypes.Structure):
     _fields_ = [('Base', ctypes.c_ulong),
@@ -188,50 +183,7 @@ x1 = []
 y = []
 x4 = []
 y4 = []
-#-----------------------ver1-------------------------------------------
-'''
-i = 0
-while i < 65535:
-    time.sleep(0.0001)
-    if Data[i] < 10000:
-        x2 = Data[i]*(10.0/8000)
-        x1.append(x2)
-        y.append(i*tr)
-    elif Data[i] > 10000:
-        x3 = (Data[i]-65536)*(10.0/8000)
-        x1.append(x3)
-        y.append(i*tr)
-    i = i + 1
-su = sum(x1[500:]) / 65536
-sur = round(su, 4)
-print sur
-#print ((max(x1[500:]) - min(x1[500:])) / (1.4142135 * 2))
-'''
-#---------------------ver2-----------------------------------------------
-'''N = pp.contents.NCh
-k = 0
-while k < N:
-    i = 0 + k
-    time.sleep(0.1)
-    while i < 131072:       
-        if Data[i] < 10000:
-            x2 = Data[i]*(10.0/8000)
-            x1.append(x2)
-            y.append(i*tr)
-        elif Data[i] > 10000:
-            x3 = (Data[i]-65536)*(10.0/8000)
-            x1.append(x3)
-            y.append(i*tr)
-        i = i + N
-    dc = sum(x1) / 131072
-    dc = round(dc, 4)
-    print 'Chn', k, dc
-    #ac = (max(x1) - min(x1)) / (1.4142135 * 2)
-    #ac = round(ac, 4)
-    #print 'Chn', k, ac
-    x1 = []
-    k = k + 1'''
-#---------------------ver3------------------------------------------------
+
 N = pp.contents.NCh
 k = 0
 while k < N:
@@ -253,44 +205,13 @@ while k < N:
 
 k = 0
 while k < N:
-    dc = sum(x4[k])/(131072/N)                          # постоянное напряжение
+    dc = sum(x4[k])/(131072/N)                          # если постоянное напряжение
     dc = round(dc, 4)
     print 'Chn', k, dc
-    '''ac = (max(x4[k]) - min(x4[k])) / (1.4142135 * 2) # переменное напряжение
+    '''ac = (max(x4[k]) - min(x4[k])) / (1.4142135 * 2) # если переменное напряжение
     ac = round(ac, 4)
     print 'Chn', k, ac'''
     k = k + 1
-#------------------------------------------------------------------------
+
 print 'StopDevice', wl.StopLDevice(hIfc)
 print 'CloseDevice', wl.CloseLDevice(hIfc)
-
-x5 = x4[2]
-spectrum = fft.fft(x5)
-freq = fft.fftfreq(len(spectrum))
-
-threshold = 0.5 * max(abs(spectrum))
-mask = abs(spectrum) > threshold
-peaks = freq[mask] * fr / N
-print peaks
-
-fig = figure(1)
-
-ax1 = fig.add_subplot(211)
-ax1.plot(y4[2], x4[2])
-ax1.grid(True)
-ax1.set_xlim((0.002, 0.009))
-ax1.set_ylabel('U, V')
-l1=ax1.set_title('t, sec')
-l1.set_color('g')
-l1.set_fontsize('large')
-
-ax2 = fig.add_subplot(212)
-ax2.plot(freq*fr/N, abs(spectrum))
-ax2.grid(True)
-ax2.set_xlim((-5000, 5000))
-l2 = ax2.set_xlabel('f, Hz')
-l2.set_color('g')
-l2.set_fontsize('large')
-
-show()
-#--------------------------------------------------
