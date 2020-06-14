@@ -5,4 +5,4 @@
 + Содержание:
   + lcio.py: содержит пример работы с АЦП используя функцию IoAsync для 4-х усилений (1, 4, 16, 64);
   + lcio2.py: содержит пример работы с ЦАП используя функцию IoAsync;
-  + lct.py: содержит пример работы с АЦП используя функции RequestBufferStream, FillDAQparameters и SetParametersStream для усиления 1, с опросом 16 каналов с частотой 400 кГц.
+  + lct.py: содержит пример работы с АЦП используя функции RequestBufferStream, FillDAQparameters и SetParametersStream для усиления 1, с опросом 16 каналов с частотой АЦП 400 кГц.
