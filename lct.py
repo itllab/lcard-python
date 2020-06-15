@@ -40,7 +40,7 @@ class read(ctypes.Structure):
                 ('Custom', ctypes.c_ushort*32)]
 
 class wadc_par_0(ctypes.Structure):
-    _pack_ = 1
+    _pack_ = 1          # важно заполнять структуру по битно
     _fields_ = [
                 ('s_Type', ctypes.c_ulong),
                 ('FIFO', ctypes.c_ulong),
